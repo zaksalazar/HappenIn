@@ -1,10 +1,9 @@
 $(document).ready(function () {
-  const city = $("#city").value; 
+  const city = $("#city").value;
   const searchBtn = $("#placeholder");
-  const date = $("#date").value 
+  const date = $("#date").value;
   const radius = $("#radius");
-  const genreId = $("#genreSearch").value 
-
+  const genreId = $("#genreSearch").value;
 
   //add event handler for search button click
   $("#submitButton").on("click", pullBands());
@@ -24,11 +23,10 @@ $(document).ready(function () {
     const bands = bandsData.bands;
     document.getElementById("band").textContent = bandsData.events.name;
     document.getElementById("placeholder").innerHTML = "";
-    document.getElementById("city").textContent = bandsData.events.venues.city.name;
-    document.getElementById("datetime").textContent =bandsData.events.dates.start.dateTime;
+    document.getElementById("city").textContent =
+      bandsData.events.venues.city.name;
+    document.getElementById("datetime").textContent =
+      bandsData.events.dates.start.dateTime;
     console.log(band, city, datetime);
   }
 });
-
-
-
