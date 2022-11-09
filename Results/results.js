@@ -6,10 +6,10 @@ $(document).ready(function () {
 
   //add event handler for search button click
   searchBtn.on("click", pullBands);
-  pullBands();
+  //pullBands();
   //render available options from api, hover over options display detail card
   function pullBands(res) {
-    //TODO - findout correct format for genreId param and startDateTime param -
+    //TODO - findout correct format for genreId param and startDateTime param - can use classificationName parameter
     //TODO: validate options before fetching
     fetch(
       `https://app.ticketmaster.com/discovery/v2/events.json?city=${city}&startDateTime=${date}:00Z&radius=100&apikey=UrzgZnCWVNTGuF7NQOaiNiHxt2Kjh8AI`
