@@ -5,6 +5,11 @@ html{
     -o-background-size: cover;
     background-size: cover;
 }
+nav {
+    display: block;
+    width: 100vh;
+    height: 50vh;
+}
 
 body {
         display: flex;
@@ -32,13 +37,13 @@ body {
 }
 
 .FlexContainer div {
-    background: #484646d0;;
+    background: #484646d0;
     color: rgb(255, 255, 255);
     padding: 1em;
     border-radius: 30px;
     margin: 0.5em;
-    width: 25%;
-    height: 50%;
+    width: 60%;
+    height: 43%;
     align-items: center;
     justify-content: space-between;
 

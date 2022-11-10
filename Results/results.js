@@ -147,12 +147,19 @@ $(document).ready(function () {
   }
 });
 
-let map;
-
+// Initialize and add the map
 function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 8,
+  // The location of Los Angele
+  const losAngeles = { lat: 34.052235, lng: -118.243683 };
+  // The map, centered at Los Angeles
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 10,
+    center: losAngeles,
+  });
+  // The marker, positioned at Los Angeles
+  const marker = new google.maps.Marker({
+    position: losAngeles,
+    map: map,
   });
 }
 
