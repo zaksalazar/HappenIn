@@ -11,14 +11,7 @@
     </head>
     <body>
         <section class='FlexContainer' id="eventCards">
-            <div>
-                <h2>Event</h2>
-                <p>info1</p>
-                <p>info2</p>
-                <p>info3</p>
-                <p>info4</p>
-                <p>info5</p>
-            </div>
+            <div id="map"></div>
             
         </section>
         <!-- <section class='venueResults'>
@@ -76,6 +69,11 @@
     </div>
     </body>
     </html>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvvCgjq7qir0MmJOxoIirIYhqd6vujN9g&libraries=visualization,places" async defer></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
+      defer
+    ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="./results.js"></script>
 </html>

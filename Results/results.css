@@ -13,6 +13,9 @@ body {
          background-repeat: no-repeat;
          background-position: center; 
 }
+#map {
+    height: 100%;
+  }
 
 
 .FlexContainer {
@@ -23,14 +26,13 @@ body {
     align-items: flex-end;
     align-content: flex-start;
     width: 100%;
-    
     height: 100vh;
     overflow: auto;
     flex-direction: row;
 }
 
 .FlexContainer div {
-    background: #1f1e1ed0;;
+    background: #484646d0;;
     color: rgb(255, 255, 255);
     padding: 1em;
     border-radius: 30px;
