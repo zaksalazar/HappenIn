@@ -17,12 +17,12 @@ body {
 
 .FlexContainer {
     display: flex;
-    margin-left: 6em;
+    /* margin-left: 6em; */
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-end;
     align-content: flex-start;
-    width: 75%;
+    width: 100%;
     
     height: 60vh;
     overflow: auto;

@@ -87,12 +87,6 @@ $(document).ready(function () {
     eventSubGenre.textContent = `Sub-Genre: ${data.classifications[0].subGenre.name}`
     card.appendChild(eventSubGenre)
 
-    var dates = data.dates.start
-    console.log(dates.localDate + ' ' + dates.localTime)
-    var eventDate = document.createElement('p')
-    eventDate.textContent = `Date: ${dates.localDate} ${dates.localTime}`
-    card.appendChild(eventDate)
-
     console.log(data.priceRanges)
     var eventPrice = document.createElement('p')
     if(data.priceRanges){
@@ -102,6 +96,22 @@ $(document).ready(function () {
       eventPrice.textContent = 'For more info, visit link below'
     }
     card.appendChild(eventPrice)
+
+    var dates = data.dates.start
+    console.log(dates.localDate + ' ' + dates.localTime)
+    var eventDate = document.createElement('p')
+    eventDate.textContent = `Date: ${dates.localDate} ${dates.localTime}`
+    card.appendChild(eventDate)
+
+    var location = data._embedded.venues[0]
+    console.log(location.name + location.address.line1 + location.city.name + location.country.countryCode + location.postalCode)
+    var eventLocation = document.createElement('p')
+    eventLocation.textContent = `Location: ${location.name}`
+    card.appendChild(eventLocation)
+
+    var eventAddress = document.createElement('p')
+    eventAddress.textContent = `${location.address.line1} ${location.city.name}, ${location.country.countryCode} ${location.postalCode}`
+    card.appendChild(eventAddress)
 
     console.log(data.url)
     var eventUrl = document.createElement('p')
