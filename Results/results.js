@@ -7,7 +7,7 @@ $(document).ready(function () {
 
   var eventCards = document.querySelector("#eventCards")
 
-  var numberOfEvents = 3;
+  var numberOfEvents = 5;
 
   // reference: https://www.sitepoint.com/get-url-parameters-with-javascript/
   function getAllUrlParams(url) {
