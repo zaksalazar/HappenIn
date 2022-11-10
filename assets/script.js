@@ -23,7 +23,7 @@ $(document).ready(function () {
     console.log(url)
 
     var tempUrl = url.split("index.html")
-    newUrl = tempUrl[0] + "/Results/results.html"
+    newUrl = tempUrl[0] + "Results/results.html"
     console.log(newUrl)
 
     
