@@ -163,4 +163,6 @@ function initMap() {
   });
 }
 
+// google
+
 window.initMap = initMap;
