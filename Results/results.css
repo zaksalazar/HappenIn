@@ -1,5 +1,5 @@
 html{ 
-    background: url('https://source.unsplash.com/1600x900/?landscape'); 
+    background-image: url('https://media.self.com/photos/5e70f72443731c000882cfe7/4:3/w_2560%2Cc_limit/GettyImages-125112134.jpg');
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -47,6 +47,16 @@ body {
     align-items: center;
     justify-content: space-between;
 
+}
+
+img#logo {
+        height: 200px;
+        FONT-WEIGHT: 200;
+        FONT-WEIGHT: 200;
+        FONT-WEIGHT: 200;
+        FONT-WEIGHT: 200;
+        FONT-WEIGHT: 200;
+        FONT-WEIGHT: 200;
 }
 
 /* .venueResults {
