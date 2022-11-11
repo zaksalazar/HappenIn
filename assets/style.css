@@ -6,7 +6,8 @@ body {
     margin: 0;
     background: #222;
     font-family: 'Roboto Mono', monospace;
-    background-image: url('https://source.unsplash.com/1600x900/?landscape');
+    background-image: url('https://source.unsplash.com/1600x900/?city');
+    background-repeat: no-repeat;
     font-size: 120%;
 }
 
@@ -20,8 +21,10 @@ body {
     max-width: 575px;
 }
 
-h1.temp{
-    margin: 0;
+
+h2.city {
+    display: flex;
+    justify-content: center;
 }
 
 .search {
