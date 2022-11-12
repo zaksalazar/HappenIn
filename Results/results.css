@@ -32,7 +32,7 @@ body {
     align-content: flex-start;
     width: 100%;
     height: 100vh;
-    overflow: auto;
+    /* overflow: auto; */
     flex-direction: row;
 }
 
@@ -47,6 +47,7 @@ body {
     align-items: center;
     justify-content: space-between;
     overflow-wrap: break-word;
+    overflow: auto;
 }
 
 img#logo {
@@ -59,7 +60,7 @@ img#logo {
     FONT-WEIGHT: 200;
 }
 
-@media screen and (max-width: 755px) {
+@media screen and (max-width: 850px) {
     body {
        flex-direction: column;
     }
