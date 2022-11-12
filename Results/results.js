@@ -114,8 +114,10 @@ $(document).ready(function () {
     card.appendChild(eventAddress)
 
     console.log(data.url)
-    var eventUrl = document.createElement('p')
-    eventUrl.textContent = `url: ${data.url}`
+    var eventUrl = document.createElement('a')
+    eventUrl.setAttribute('href', `${data.url}`)
+    eventUrl.setAttribute('target', '_blank')
+    eventUrl.textContent = `${data.url}`
     card.appendChild(eventUrl)
   }
 
