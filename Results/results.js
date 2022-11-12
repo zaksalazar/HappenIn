@@ -110,7 +110,7 @@ $(document).ready(function () {
     card.appendChild(eventLocation)
 
     var eventAddress = document.createElement('p')
-    eventAddress.textContent = `${location.address.line1} ${location.city.name}, ${location.country.countryCode} ${location.postalCode}`
+    eventAddress.textContent = `Address: ${location.address.line1} ${location.city.name}, ${location.country.countryCode} ${location.postalCode}`
     card.appendChild(eventAddress)
 
     console.log(data.url)
@@ -148,19 +148,36 @@ $(document).ready(function () {
 });
 
 // Initialize and add the map
-function initMap() {
-  // The location of Los Angele
-  const losAngeles = { lat: 34.052235, lng: -118.243683 };
-  // The map, centered at Los Angeles
-  const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 10,
-    center: losAngeles,
-  });
-  // The marker, positioned at Los Angeles
-  const marker = new google.maps.Marker({
-    position: losAngeles,
-    map: map,
-  });
-}
+// function initMap() {
+//   // The location of Los Angele
+//   const losAngeles = { lat: 34.052235, lng: -118.243683 };
+//   // The map, centered at Los Angeles
+//   const map = new google.maps.Map(document.getElementById("map"), {
+//     zoom: 10,
+//     center: losAngeles,
+//   });
+//   // The marker, positioned at Los Angeles
+//   const marker = new google.maps.Marker({
+//     position: losAngeles,
+//     map: map,
+//   });
+// }
 
+var latlng = [];
+var latitude = 0;
+var longitude = 0;
+
+let map;
+
+// function to create a google map
+function initMap() {
+    latlng = new google.maps.LatLng(latitude, longitude);
+    infowindow = new google.maps.InfoWindow(location);
+    // The map, centered at latlng
+    map = new google.maps.Map(document.getElementById('map'), {zoom: 5, center: latlng});
+    // The marker, positioned at latlng
+    marker = new google.maps.Marker({position: latlng, map: map});
+}    
+
+console.log(location)
 window.initMap = initMap;

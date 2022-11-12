@@ -7,6 +7,8 @@ header {
         height: 220px;
         justify-content: right;
         align-items: right;
+        position: absolute;
+        top: 0px;
  } 
 
 body {
@@ -106,6 +108,7 @@ input[type="datetime-local"] {
     font-family: 'Roboto Mono', monospace;
     font-size: 105%;
     width: calc(80% - 60px);
+    color-scheme: dark;
 }
 
 img#logo {
@@ -117,3 +120,7 @@ img#logo {
     FONT-WEIGHT: 200;
     FONT-WEIGHT: 200;
 }
+
+#dateinput {
+    color: white
+} 
