@@ -46,7 +46,7 @@ body {
     height: 43%;
     align-items: center;
     justify-content: space-between;
-
+    overflow-wrap: break-word;
 }
 
 img#logo {

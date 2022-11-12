@@ -66,29 +66,33 @@ $(document).ready(function () {
 
   function displayEvents(data) {
     
-    console.log(data)
+    //console.log(data)
     
     
     // if !data.priceRanges[0], display "see link below"
     // var price = data.priceRanges[0]
     // console.log(price.min + '-' + price.max + ' ' + price.currency)
     
-
+    // div card
     var card = document.createElement('div')
     eventCards.appendChild(card)
 
-    console.log(data.name)
+    // event name
+    //console.log(data.name)
     var eventTitle = document.createElement('h2')
     eventTitle.textContent = `${data.name}`
     card.appendChild(eventTitle)
 
-    console.log(data.classifications[0].subGenre.name)
+    // event subgenre
+    //console.log(data.classifications[0].subGenre.name)
     var eventSubGenre = document.createElement('p')
     eventSubGenre.textContent = `Sub-Genre: ${data.classifications[0].subGenre.name}`
     card.appendChild(eventSubGenre)
 
-    console.log(data.priceRanges)
+    // event price
+    //console.log(data.priceRanges)
     var eventPrice = document.createElement('p')
+    // if there is a price display it, else display text
     if(data.priceRanges){
       var price = data.priceRanges[0]
       eventPrice.textContent = `${price.min}-${price.max} ${price.currency}`
@@ -97,23 +101,27 @@ $(document).ready(function () {
     }
     card.appendChild(eventPrice)
 
+    // event date
     var dates = data.dates.start
-    console.log(dates.localDate + ' ' + dates.localTime)
+    //console.log(dates.localDate + ' ' + dates.localTime)
     var eventDate = document.createElement('p')
     eventDate.textContent = `Date: ${dates.localDate} ${dates.localTime}`
     card.appendChild(eventDate)
 
+    // event location name
     var location = data._embedded.venues[0]
-    console.log(location.name + location.address.line1 + location.city.name + location.country.countryCode + location.postalCode)
+    //console.log(location.name + location.address.line1 + location.city.name + location.country.countryCode + location.postalCode)
     var eventLocation = document.createElement('p')
     eventLocation.textContent = `Location: ${location.name}`
     card.appendChild(eventLocation)
 
+    // event address
     var eventAddress = document.createElement('p')
     eventAddress.textContent = `${location.address.line1} ${location.city.name}, ${location.country.countryCode} ${location.postalCode}`
     card.appendChild(eventAddress)
 
-    console.log(data.url)
+    // event ticket purchasing url
+    //console.log(data.url)
     var eventUrl = document.createElement('a')
     eventUrl.setAttribute('href', `${data.url}`)
     eventUrl.setAttribute('target', '_blank')
@@ -121,7 +129,7 @@ $(document).ready(function () {
     card.appendChild(eventUrl)
   }
 
-  pullBands();
+  
   //render available options from api, hover over options display detail card
   function pullBands(res) {
     //TODO - findout correct format for genreId param and startDateTime param - can use classificationName parameter
@@ -147,6 +155,8 @@ $(document).ready(function () {
         console.log("err", err);
       });
   }
+
+  pullBands();
 });
 
 // Initialize and add the map
@@ -159,7 +169,7 @@ function initMap() {
     center: losAngeles,
   });
   // The marker, positioned at Los Angeles
-  const marker = new google.maps.Marker({
+  new google.maps.Marker({
     position: losAngeles,
     map: map,
   });
