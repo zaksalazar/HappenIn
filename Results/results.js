@@ -126,7 +126,7 @@ $(document).ready(function () {
 
     console.log(data.url)
     var eventUrl = document.createElement('a')
-    eventUrl.textContent = `url: ${data.url}`
+    eventUrl.textContent = `Get Tickets: ${data.url}`
     eventUrl.href= data.url
     card.appendChild(eventUrl)
   }

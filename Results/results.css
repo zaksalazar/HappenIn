@@ -67,6 +67,10 @@ h2 {
     font-size: xx-large
 }
 
+a {
+    font-size: x-large;
+    color: orange
+}
 
 /* .venueResults {
     display: flex;
