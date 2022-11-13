@@ -67,6 +67,17 @@ $(document).ready(function () {
   function displayEvents(data) {
     
     console.log(data)
+    var events = data 
+    var searchedEvents = localStorage.setItem('events', JSON.stringify(events)); 
+// dynamically add history button 
+
+    function addToHistory() {
+      const container = document.getElementById("historyContainer");
+      const historyButton = document.createElement("button");
+      historyButton.classList.add("historyBtn");
+      historyButton.innerHTML = city;
+      container.appendChild(historyButton);
+    }
     
     
     // if !data.priceRanges[0], display "see link below"
