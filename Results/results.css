@@ -72,6 +72,18 @@ a {
     color: orange
 }
 
+div#historyContainer {
+    background: #484646d0;
+    color: rgb(255, 255, 255);
+    padding: 1em;
+    border-radius: 30px;
+    margin: 0.5em;
+    width: 60%;
+    height: 43%;
+    align-items: center;
+    justify-content: space-between;
+}
+
 /* .venueResults {
     display: flex;
     margin-left: 50px;

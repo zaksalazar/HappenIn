@@ -1,39 +1,39 @@
 $(document).ready(function () {
+  var url = window.location.href;
+  console.log(url);
+  var params = getAllUrlParams(url);
+  console.log(params);
 
-  var url = window.location.href
-  console.log(url)
-  var params = getAllUrlParams(url)
-  console.log(params)
-
-  var eventCards = document.querySelector("#eventCards")
+  var eventCards = document.querySelector("#eventCards");
 
   var numberOfEvents = 5;
 
   // reference: https://www.sitepoint.com/get-url-parameters-with-javascript/
   function getAllUrlParams(url) {
     // get query string from url (optional) or window
-    var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
+    var queryString = url ? url.split("?")[1] : window.location.search.slice(1);
     // we'll store the parameters here
     var obj = {};
     // if query string exists
     if (queryString) {
       // stuff after # is not part of query string, so get rid of it
-      queryString = queryString.split('#')[0];
+      queryString = queryString.split("#")[0];
       // split our query string into its component parts
-      var arr = queryString.split('&');
+      var arr = queryString.split("&");
       for (var i = 0; i < arr.length; i++) {
         // separate the keys and the values
-        var a = arr[i].split('=');
+        var a = arr[i].split("=");
         // set parameter name and value (use 'true' if empty)
         var paramName = a[0];
-        var paramValue = typeof (a[1]) === 'undefined' ? true : a[1];
+        var paramValue = typeof a[1] === "undefined" ? true : a[1];
         // (optional) keep case consistent
         paramName = paramName.toLowerCase();
-        if (typeof paramValue === 'string') paramValue = paramValue.toLowerCase();
+        if (typeof paramValue === "string")
+          paramValue = paramValue.toLowerCase();
         // if the paramName ends with square brackets, e.g. colors[] or colors[2]
         if (paramName.match(/\[(\d+)?\]$/)) {
           // create key if it doesn't exist
-          var key = paramName.replace(/\[(\d+)?\]/, '');
+          var key = paramName.replace(/\[(\d+)?\]/, "");
           if (!obj[key]) obj[key] = [];
           // if it's an indexed array e.g. colors[2]
           if (paramName.match(/\[\d+\]$/)) {
@@ -49,7 +49,7 @@ $(document).ready(function () {
           if (!obj[paramName]) {
             // if it doesn't exist, create property
             obj[paramName] = paramValue;
-          } else if (obj[paramName] && typeof obj[paramName] === 'string'){
+          } else if (obj[paramName] && typeof obj[paramName] === "string") {
             // if property does exist and it's a string, convert it to an array
             obj[paramName] = [obj[paramName]];
             obj[paramName].push(paramValue);
@@ -60,71 +60,67 @@ $(document).ready(function () {
         }
       }
     }
-  
+
     return obj;
   }
 
   function displayEvents(data) {
-    
-    console.log(data)
-  
-    
-    
+    console.log("HERE", data);
+
     // if !data.priceRanges[0], display "see link below"
     // var price = data.priceRanges[0]
     // console.log(price.min + '-' + price.max + ' ' + price.currency)
-    
 
-    var card = document.createElement('div')
-    eventCards.appendChild(card)
+    var card = document.createElement("div");
+    eventCards.appendChild(card);
 
-    console.log(data.name)
-    var eventTitle = document.createElement('h2')
-    eventTitle.textContent = `${data.name}`
-    card.appendChild(eventTitle)
+    console.log(data.name);
+    var eventTitle = document.createElement("h2");
+    eventTitle.textContent = `${data.name}`;
+    card.appendChild(eventTitle);
 
-    console.log(data.classifications[0].subGenre.name)
-    var eventSubGenre = document.createElement('p')
-    eventSubGenre.textContent = `Sub-Genre: ${data.classifications[0].subGenre.name}`
-    card.appendChild(eventSubGenre)
+    console.log(data.classifications[0].subGenre.name);
+    var eventSubGenre = document.createElement("p");
+    eventSubGenre.textContent = `Sub-Genre: ${data.classifications[0].subGenre.name}`;
+    card.appendChild(eventSubGenre);
 
-    console.log(data.priceRanges)
-    var eventPrice = document.createElement('p')
-    if(data.priceRanges){
-      var price = data.priceRanges[0]
-      eventPrice.textContent = `${price.min}-${price.max} ${price.currency}`
+    console.log(data.priceRanges);
+    var eventPrice = document.createElement("p");
+    if (data.priceRanges) {
+      var price = data.priceRanges[0];
+      eventPrice.textContent = `${price.min}-${price.max} ${price.currency}`;
     } else {
-      eventPrice.textContent = 'For more info, visit link below'
+      eventPrice.textContent = "For more info, visit link below";
     }
-    card.appendChild(eventPrice)
+    card.appendChild(eventPrice);
 
-    var dates = data.dates.start
-    console.log(dates.localDate + ' ' + dates.localTime)
-    var eventDate = document.createElement('p')
-    eventDate.textContent = `Date: ${dates.localDate} ${dates.localTime}`
-    card.appendChild(eventDate)
+    var dates = data.dates.start;
+    console.log(dates.localDate + " " + dates.localTime);
+    var eventDate = document.createElement("p");
+    eventDate.textContent = `Date: ${dates.localDate} ${dates.localTime}`;
+    card.appendChild(eventDate);
 
-    var location = data._embedded.venues[0]
-    console.log(location.name + location.address.line1 + location.city.name + location.country.countryCode + location.postalCode)
-    var eventLocation = document.createElement('p')
-    eventLocation.textContent = `Location: ${location.name}`
-    card.appendChild(eventLocation)
+    var location = data._embedded.venues[0];
+    console.log(
+      location.name +
+        location.address.line1 +
+        location.city.name +
+        location.country.countryCode +
+        location.postalCode
+    );
+    var eventLocation = document.createElement("p");
+    eventLocation.textContent = `Location: ${location.name}`;
+    card.appendChild(eventLocation);
 
-    var eventAddress = document.createElement('p')
-    eventAddress.textContent = `Address: ${location.address.line1} ${location.city.name}, ${location.country.countryCode} ${location.postalCode}`
-    card.appendChild(eventAddress)
+    var eventAddress = document.createElement("p");
+    eventAddress.textContent = `Address: ${location.address.line1} ${location.city.name}, ${location.country.countryCode} ${location.postalCode}`;
+    card.appendChild(eventAddress);
 
-    console.log(data.url)
-    var eventUrl = document.createElement('a')
-    eventUrl.textContent = `Get Tickets: ${data.url}`
-    eventUrl.href= data.url
-    card.appendChild(eventUrl)
-
-    var saveButton = document.createElement('button') 
-    saveButtton.classList.add('saveBtn')
-    saveButton.innerHTML = 'Save To My Shows'
-    card.appendChild(saveButton)
-    console.log('here')
+    console.log(data.url);
+    var eventUrl = document.createElement("a");
+    eventUrl.textContent = `Get Tickets: ${data.url}`;
+    eventUrl.href = data.url;
+    card.appendChild(eventUrl);
   }
 
   pullBands();
@@ -139,19 +135,55 @@ $(document).ready(function () {
       .then((bandData) => {
         renderBands(bandData);
         function renderBands(bandData) {
-          
-          console.log(bandData._embedded.events)
+          console.log(bandData._embedded.events);
 
           for (var i = 0; i < bandData._embedded.events.length; i++) {
-            displayEvents(bandData._embedded.events[i])
+            displayEvents(bandData._embedded.events[i]);
+            var history = localStorage.getItem("history");
+            if (history === null) {
+              history = [bandData._embedded.events];
+              localStorage.setItem("history", JSON.stringify(history));
+            } else {
+              history = JSON.parse(history);
+              history.push(bandData._embedded.events);
+              localStorage.setItem("history", JSON.stringify(history));
+            }
           }
-
-          
         }
       })
       .catch((err) => {
         console.log("err", err);
       });
+  }
+
+  //Daynamically add the past city on the search history
+  function addToHistory(city) {
+    const container = document.getElementById("historyContainer");
+    const historyButton = document.createElement("button");
+    historyButton.classList.add("historyBtn");
+    historyButton.innerHTML = city;
+    container.appendChild(historyButton);
+  }
+
+  function renderSavedHistoryBtns() {
+    var savedHistory = localStorage.getItem("history");
+    savedHistory = JSON.parse(savedHistory);
+    if (savedHistory !== null) {
+      for (let i = 0; i < savedHistory.length; i++) {
+        addToHistory(savedHistory[i].name);
+      }
+    }
+  }
+
+  $(".historyBtn").on("click", historyClick);
+  function historyClick(event) {
+    var savedHistory = localStorage.getItem("history");
+    savedHistory = JSON.parse(savedHistory);
+    for (let i = 0; i < savedHistory.length; i++) {
+      if (event.target.textContent === savedHistory[i].name) {
+        renderWeather(savedHistory[i]);
+      }
+    }
   }
 });
 
@@ -171,6 +203,7 @@ $(document).ready(function () {
 //   });
 // }
 
+<<<<<<< HEAD
 // var latlng = [];
 // var latitude = 0;
 // var longitude = 0;
@@ -189,3 +222,26 @@ $(document).ready(function () {
 
 // console.log(location)
 // window.initMap = initMap;
+=======
+var latlng = [];
+var latitude = 0;
+var longitude = 0;
+
+let map;
+
+// function to create a google map
+function initMap() {
+  latlng = new google.maps.LatLng(latitude, longitude);
+  infowindow = new google.maps.InfoWindow(location);
+  // The map, centered at latlng
+  map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 5,
+    center: latlng,
+  });
+  // The marker, positioned at latlng
+  marker = new google.maps.Marker({ position: latlng, map: map });
+}
+
+console.log(location);
+window.initMap = initMap;
+>>>>>>> e4b0e734b43b0da09acdecd08ade45b049b65afa
