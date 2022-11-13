@@ -67,17 +67,7 @@ $(document).ready(function () {
   function displayEvents(data) {
     
     console.log(data)
-    var events = data 
-    var searchedEvents = localStorage.setItem('events', JSON.stringify(events)); 
-// dynamically add history button 
-
-    function addToHistory() {
-      const container = document.getElementById("historyContainer");
-      const historyButton = document.createElement("button");
-      historyButton.classList.add("historyBtn");
-      historyButton.innerHTML = city;
-      container.appendChild(historyButton);
-    }
+  
     
     
     // if !data.priceRanges[0], display "see link below"
@@ -129,6 +119,12 @@ $(document).ready(function () {
     eventUrl.textContent = `Get Tickets: ${data.url}`
     eventUrl.href= data.url
     card.appendChild(eventUrl)
+
+    var saveButton = document.createElement('button') 
+    saveButtton.classList.add('saveBtn')
+    saveButton.innerHTML = 'Save To My Shows'
+    card.appendChild(saveButton)
+    console.log('here')
   }
 
   pullBands();
