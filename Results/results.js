@@ -203,26 +203,6 @@ $(document).ready(function () {
 //   });
 // }
 
-<<<<<<< HEAD
-// var latlng = [];
-// var latitude = 0;
-// var longitude = 0;
-
-// let map;
-
-// // function to create a google map
-// function initMap() {
-//     latlng = new google.maps.LatLng(latitude, longitude);
-//     infowindow = new google.maps.InfoWindow(location);
-//     // The map, centered at latlng
-//     map = new google.maps.Map(document.getElementById('map'), {zoom: 5, center: latlng});
-//     // The marker, positioned at latlng
-//     marker = new google.maps.Marker({position: latlng, map: map});
-// }    
-
-// console.log(location)
-// window.initMap = initMap;
-=======
 var latlng = [];
 var latitude = 0;
 var longitude = 0;
@@ -244,4 +224,3 @@ function initMap() {
 
 console.log(location);
 window.initMap = initMap;
->>>>>>> e4b0e734b43b0da09acdecd08ade45b049b65afa
