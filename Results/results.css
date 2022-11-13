@@ -59,6 +59,15 @@ img#logo {
         FONT-WEIGHT: 200;
 }
 
+p {
+    font-size: x-large; 
+}
+
+h2 {
+    font-size: xx-large
+}
+
+
 /* .venueResults {
     display: flex;
     margin-left: 50px;
