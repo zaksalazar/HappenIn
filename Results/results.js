@@ -75,17 +75,17 @@ $(document).ready(function () {
     var card = document.createElement("div");
     eventCards.appendChild(card);
 
-    console.log(data.name);
+    // console.log(data.name);
     var eventTitle = document.createElement("h2");
     eventTitle.textContent = `${data.name}`;
     card.appendChild(eventTitle);
 
-    console.log(data.classifications[0].subGenre.name);
+    // console.log(data.classifications[0].subGenre.name);
     var eventSubGenre = document.createElement("p");
     eventSubGenre.textContent = `Sub-Genre: ${data.classifications[0].subGenre.name}`;
     card.appendChild(eventSubGenre);
 
-    console.log(data.priceRanges);
+    // console.log(data.priceRanges);
     var eventPrice = document.createElement("p");
     if (data.priceRanges) {
       var price = data.priceRanges[0];
@@ -96,19 +96,19 @@ $(document).ready(function () {
     card.appendChild(eventPrice);
 
     var dates = data.dates.start;
-    console.log(dates.localDate + " " + dates.localTime);
+    // console.log(dates.localDate + " " + dates.localTime);
     var eventDate = document.createElement("p");
     eventDate.textContent = `Date: ${dates.localDate} ${dates.localTime}`;
     card.appendChild(eventDate);
 
     var location = data._embedded.venues[0];
-    console.log(
-      location.name +
-        location.address.line1 +
-        location.city.name +
-        location.country.countryCode +
-        location.postalCode
-    );
+    // console.log(
+    //   location.name +
+    //     location.address.line1 +
+    //     location.city.name +
+    //     location.country.countryCode +
+    //     location.postalCode
+    // );
     var eventLocation = document.createElement("p");
     eventLocation.textContent = `Location: ${location.name}`;
     card.appendChild(eventLocation);
@@ -117,7 +117,7 @@ $(document).ready(function () {
     eventAddress.textContent = `Address: ${location.address.line1} ${location.city.name}, ${location.country.countryCode} ${location.postalCode}`;
     card.appendChild(eventAddress);
 
-    console.log(data.url);
+    // console.log(data.url);
     var eventUrl = document.createElement("a");
     eventUrl.textContent = `Get Tickets: ${data.url}`;
     eventUrl.href = data.url;
