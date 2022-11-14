@@ -137,7 +137,7 @@ $(document).ready(function () {
         renderBands(bandData);
         function renderBands(bandData) {
           console.log(bandData._embedded.events);
-// storing bandsData in local storage 
+
           for (var i = 0; i < bandData._embedded.events.length; i++) {
             displayEvents(bandData._embedded.events[i]);
           }
@@ -170,7 +170,7 @@ $(document).ready(function () {
       }
     }
   }
-// historyContainer
+
   $(".historyBtn").on("click", historyClick);
   function historyClick(event) {
     var savedHistory = localStorage.getItem("history");
