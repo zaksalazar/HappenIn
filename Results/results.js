@@ -139,15 +139,15 @@ $(document).ready(function () {
 // storing bandsData in local storage 
           for (var i = 0; i < bandData._embedded.events.length; i++) {
             displayEvents(bandData._embedded.events[i]);
-            var history = localStorage.getItem("history");
-            if (history === null) {
-              history = [bandData._embedded.events];
-              localStorage.setItem("history", JSON.stringify(history));
-            } else {
-              history = JSON.parse(history);
-              history.push(bandData._embedded.events);
-              localStorage.setItem("history", JSON.stringify(history));
-            }
+          }
+          var history = localStorage.getItem("history");
+          if (history === null) {
+            history = [bandData._embedded.events];
+            localStorage.setItem("history", JSON.stringify(history));
+          } else {
+            history = JSON.parse(history);
+            history.push(bandData._embedded.events);
+            localStorage.setItem("history", JSON.stringify(history));
           }
         }
       })
