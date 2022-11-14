@@ -130,7 +130,22 @@ $(document).ready(function () {
   }
 
   function clickHistory(index){
-    console.log("show link to ", historyArray[index]);
+    console.log(historyArray[index]);
+    var currentUrl = window.location.href;
+    console.log(currentUrl);
+    var tempUrl = currentUrl.split("?")
+    var newUrl = tempUrl[0];
+    console.log(newUrl);
+
+    console.log(decodeURI(historyArray[index].city))
+
+    var newParams = new URLSearchParams(historyArray[index])
+    var query = newParams.toString();
+    console.log(query);
+    var newUrl = newUrl + '?' + query;
+    console.log(newUrl)
+
+    window.location = newUrl;
   }
 
   function showHistory() {
@@ -160,26 +175,34 @@ $(document).ready(function () {
             displayEvents(bandData._embedded.events[i]);
           }
           
+          console.log(params.city.replace('+', ' '))
+          console.log(params.date.replace('%3a', ':'))
+
+          // url format to normal string (wonder if there's a better way to do this)
+          params.city = params.city.replace('+', ' ')
+          params.date = params.date.replace('%3a', ':')
+          params.genre = params.genre.replace('+', ' ')
+
           if (historyArray === null) {
             console.log("null")
             historyArray = [params];
             
           } else {
-            console.log("historyArray present")
+            // console.log("historyArray present")
             // historyArray = JSON.parse(historyArray);
-            console.log(historyArray.length)
+            // console.log(historyArray.length)
             var paramCount = 0;
             for (var i = 0; i < historyArray.length; i++) {
               if (JSON.stringify(historyArray[i]) === JSON.stringify(params)){
-                console.log(i, "this one is here!")
+                // console.log(i, "this one is here!")
                 paramCount++;
              }
             }
             if (paramCount > 0){
-              console.log("already here! not adding!")
+              // console.log("already here! not adding!")
             }
              else {
-              console.log("not here! adding!")
+              // console.log("not here! adding!")
               historyArray.push(params);
               
             }
