@@ -45,6 +45,7 @@ body {
   height: 43%;
   align-items: center;
   justify-content: space-between;
+  overflow: auto;
 }
 
 img#logo {

@@ -6,8 +6,12 @@ $(document).ready(function () {
   console.log(params);
 
   var eventCards = document.querySelector("#eventCards");
+  var historyContainer = document.querySelector("#historyContainer")
+  var historyPanel = document.querySelector("#historyBtns")
 
   var numberOfEvents = 5;
+  var numOfHistory = 5;
+
 
   // reference: https://www.sitepoint.com/get-url-parameters-with-javascript/
   function getAllUrlParams(url) {
@@ -75,40 +79,43 @@ $(document).ready(function () {
     var card = document.createElement("div");
     eventCards.appendChild(card);
 
-    console.log(data.name);
+    // console.log(data.name);
     var eventTitle = document.createElement("h2");
     eventTitle.textContent = `${data.name}`;
     card.appendChild(eventTitle);
 
-    console.log(data.classifications[0].subGenre.name);
-    var eventSubGenre = document.createElement("p");
-    eventSubGenre.textContent = `Sub-Genre: ${data.classifications[0].subGenre.name}`;
-    card.appendChild(eventSubGenre);
+    // console.log(data.classifications[0].subGenre.name);
+    if (data.hasOwnProperty('subGenre')){
+      var eventSubGenre = document.createElement("p");
+      eventSubGenre.textContent = `Sub-Genre: ${data.classifications[0].subGenre.name}`;
+      card.appendChild(eventSubGenre);
 
-    console.log(data.priceRanges);
+    }
+
+    // console.log(data.priceRanges);
     var eventPrice = document.createElement("p");
     if (data.priceRanges) {
       var price = data.priceRanges[0];
-      eventPrice.textContent = `${price.min}-${price.max} ${price.currency}`;
+      eventPrice.textContent = `Price: ${price.min}-${price.max} ${price.currency}`;
     } else {
-      eventPrice.textContent = "For more info, visit link below";
+      eventPrice.textContent = "Price: For more info, visit link below";
     }
     card.appendChild(eventPrice);
 
     var dates = data.dates.start;
-    console.log(dates.localDate + " " + dates.localTime);
+    // console.log(dates.localDate + " " + dates.localTime);
     var eventDate = document.createElement("p");
     eventDate.textContent = `Date: ${dates.localDate} ${dates.localTime}`;
     card.appendChild(eventDate);
 
     var location = data._embedded.venues[0];
-    console.log(
-      location.name +
-        location.address.line1 +
-        location.city.name +
-        location.country.countryCode +
-        location.postalCode
-    );
+    // console.log(
+    //   location.name +
+    //     location.address.line1 +
+    //     location.city.name +
+    //     location.country.countryCode +
+    //     location.postalCode
+    // );
     var eventLocation = document.createElement("p");
     eventLocation.textContent = `Location: ${location.name}`;
     card.appendChild(eventLocation);
@@ -117,14 +124,47 @@ $(document).ready(function () {
     eventAddress.textContent = `Address: ${location.address.line1} ${location.city.name}, ${location.country.countryCode} ${location.postalCode}`;
     card.appendChild(eventAddress);
 
-    console.log(data.url);
+    // console.log(data.url);
     var eventUrl = document.createElement("a");
     eventUrl.textContent = `Get Tickets: ${data.url}`;
     eventUrl.href = data.url;
     card.appendChild(eventUrl);
   }
 
-  pullBands();
+  function clickHistory(index){
+    console.log(historyArray[index]);
+    var currentUrl = window.location.href;
+    console.log(currentUrl);
+    var tempUrl = currentUrl.split("?")
+    var newUrl = tempUrl[0];
+    console.log(newUrl);
+
+    console.log(decodeURI(historyArray[index].city))
+
+    var newParams = new URLSearchParams(historyArray[index])
+    var query = newParams.toString();
+    console.log(query);
+    var newUrl = newUrl + '?' + query;
+    console.log(newUrl)
+
+    window.location = newUrl;
+  }
+
+  function showHistory() {
+    
+    var historyBtns = document.createElement('div')
+    historyBtns.setAttribute("id", "historyBtns")
+    historyContainer.appendChild(historyBtns)
+    
+    for (var i = 0; i < historyArray.length; i++) {
+      var historyBtn = document.createElement('button')
+      historyBtn.textContent = `${historyArray[i].city}-${historyArray[i].date}-${historyArray[i].genre}`
+      // historyBtn.setAttribute("class", "btn btn-secondary w-100 border-bottom mb-1 mt-1")
+      historyBtns.appendChild(historyBtn)
+      historyBtn.addEventListener("click", clickHistory.bind(this, i))
+    }
+  }
+
   //render available options from api, hover over options display detail card
   function pullBands(res) {
     //TODO - findout correct format for genreId param and startDateTime param - can use classificationName parameter
@@ -141,15 +181,47 @@ $(document).ready(function () {
           for (var i = 0; i < bandData._embedded.events.length; i++) {
             displayEvents(bandData._embedded.events[i]);
           }
-          var history = localStorage.getItem("history");
-          if (history === null) {
-            history = [bandData._embedded.events];
-            localStorage.setItem("history", JSON.stringify(history));
+          
+          console.log(params.city.replace('+', ' '))
+          console.log(params.date.replace('%3a', ':'))
+
+          // url format to normal string (wonder if there's a better way to do this)
+          params.city = params.city.replace('+', ' ')
+          params.date = params.date.replace('%3a', ':')
+          params.genre = params.genre.replace('+', ' ')
+
+          if (historyArray === null) {
+            console.log("null")
+            historyArray = [params];
+            
           } else {
-            history = JSON.parse(history);
-            history.push(bandData._embedded.events);
-            localStorage.setItem("history", JSON.stringify(history));
+            // console.log("historyArray present")
+            // historyArray = JSON.parse(historyArray);
+            // console.log(historyArray.length)
+            var paramCount = 0;
+            for (var i = 0; i < historyArray.length; i++) {
+              if (JSON.stringify(historyArray[i]) === JSON.stringify(params)){
+                // console.log(i, "this one is here!")
+                paramCount++;
+             }
+            }
+            if (paramCount > 0){
+              // console.log("already here! not adding!")
+            }
+             else {
+              if (historyArray.length == numOfHistory){
+                historyArray.pop();
+              }
+              // console.log("not here! adding!")
+              historyArray.unshift(params);
+              
+            }
           }
+          localStorage.setItem("historyArray", JSON.stringify(historyArray));
+          
+          historyPanel = document.querySelector('#historyBtns')
+          historyContainer.removeChild(historyPanel)
+          showHistory();
         }
       })
       .catch((err) => {
@@ -158,18 +230,18 @@ $(document).ready(function () {
   }
 
   //Daynamically add the past city on the search history. THIS IS NOT WORKING 
-  function renderSavedHistoryBtns() {
-    var savedHistory = localStorage.getItem("history");
-    var savedHistory = JSON.parse(savedHistory);
-    var historyContainer = document.getElementById("historyContainer");
-    var historyBtn = document.createElement("button");
-    if (savedHistory !== null) {
-      for (let i = 0; i < savedHistory.length; i++) {
-        addToHistory(savedHistory);
-        historyContainer.appendChild(historyBtn)    
-      }
-    }
-  }
+  // function renderSavedHistoryBtns() {
+  //   var savedHistory = localStorage.getItem("history");
+  //   var savedHistory = JSON.parse(savedHistory);
+  //   var historyBtns = document.getElementById("historyBtns");
+  //   var historyBtn = document.createElement("button");
+  //   if (savedHistory !== null) {
+  //     for (let i = 0; i < savedHistory.length; i++) {
+  //       addToHistory(savedHistory);
+  //       historyBtns.appendChild(historyBtn)    
+  //     }
+  //   }
+  // }
 
   $(".historyBtn").on("click", historyClick);
   function historyClick(event) {
@@ -181,6 +253,17 @@ $(document).ready(function () {
       }
     }
   }
+
+  
+
+  if (!JSON.parse(localStorage.getItem("historyArray"))){
+    historyArray = [];
+    localStorage.setItem("historyArray", JSON.stringify(historyArray))
+  } else {
+    historyArray = JSON.parse(localStorage.getItem("historyArray"));
+  }
+
+  pullBands();
 });
 
 // Initialize and add the map
@@ -203,20 +286,20 @@ var latlng = [];
 var latitude = 0;
 var longitude = 0;
 
-let map;
+// let map;
 
-// function to create a google map
-function initMap() {
-  latlng = new google.maps.LatLng(latitude, longitude);
-  infowindow = new google.maps.InfoWindow(location);
-  // The map, centered at latlng
-  map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 5,
-    center: latlng,
-  });
-  // The marker, positioned at latlng
-  marker = new google.maps.Marker({ position: latlng, map: map });
-}
+// // function to create a google map
+// function initMap() {
+//   latlng = new google.maps.LatLng(latitude, longitude);
+//   infowindow = new google.maps.InfoWindow(location);
+//   // The map, centered at latlng
+//   map = new google.maps.Map(document.getElementById("map"), {
+//     zoom: 5,
+//     center: latlng,
+//   });
+//   // The marker, positioned at latlng
+//   marker = new google.maps.Marker({ position: latlng, map: map });
+// }
 
-console.log(location);
-window.initMap = initMap;
+// console.log(location);
+// window.initMap = initMap;
