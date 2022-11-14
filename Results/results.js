@@ -6,9 +6,11 @@ $(document).ready(function () {
   console.log(params);
 
   var eventCards = document.querySelector("#eventCards");
-  var historyPanel = document.querySelector("#historyContainer")
+  var historyContainer = document.querySelector("#historyContainer")
+  var historyPanel = document.querySelector("#historyBtns")
 
   var numberOfEvents = 5;
+  var numOfHistory = 5;
 
 
   // reference: https://www.sitepoint.com/get-url-parameters-with-javascript/
@@ -149,11 +151,16 @@ $(document).ready(function () {
   }
 
   function showHistory() {
+    
+    var historyBtns = document.createElement('div')
+    historyBtns.setAttribute("id", "historyBtns")
+    historyContainer.appendChild(historyBtns)
+    
     for (var i = 0; i < historyArray.length; i++) {
       var historyBtn = document.createElement('button')
       historyBtn.textContent = `${historyArray[i].city}-${historyArray[i].date}-${historyArray[i].genre}`
       // historyBtn.setAttribute("class", "btn btn-secondary w-100 border-bottom mb-1 mt-1")
-      historyPanel.appendChild(historyBtn)
+      historyBtns.appendChild(historyBtn)
       historyBtn.addEventListener("click", clickHistory.bind(this, i))
     }
   }
@@ -202,12 +209,18 @@ $(document).ready(function () {
               // console.log("already here! not adding!")
             }
              else {
+              if (historyArray.length == numOfHistory){
+                historyArray.pop();
+              }
               // console.log("not here! adding!")
-              historyArray.push(params);
+              historyArray.unshift(params);
               
             }
           }
           localStorage.setItem("historyArray", JSON.stringify(historyArray));
+          
+          historyPanel = document.querySelector('#historyBtns')
+          historyContainer.removeChild(historyPanel)
           showHistory();
         }
       })
@@ -217,18 +230,18 @@ $(document).ready(function () {
   }
 
   //Daynamically add the past city on the search history. THIS IS NOT WORKING 
-  function renderSavedHistoryBtns() {
-    var savedHistory = localStorage.getItem("history");
-    var savedHistory = JSON.parse(savedHistory);
-    var historyContainer = document.getElementById("historyContainer");
-    var historyBtn = document.createElement("button");
-    if (savedHistory !== null) {
-      for (let i = 0; i < savedHistory.length; i++) {
-        addToHistory(savedHistory);
-        historyContainer.appendChild(historyBtn)    
-      }
-    }
-  }
+  // function renderSavedHistoryBtns() {
+  //   var savedHistory = localStorage.getItem("history");
+  //   var savedHistory = JSON.parse(savedHistory);
+  //   var historyBtns = document.getElementById("historyBtns");
+  //   var historyBtn = document.createElement("button");
+  //   if (savedHistory !== null) {
+  //     for (let i = 0; i < savedHistory.length; i++) {
+  //       addToHistory(savedHistory);
+  //       historyBtns.appendChild(historyBtn)    
+  //     }
+  //   }
+  // }
 
   $(".historyBtn").on("click", historyClick);
   function historyClick(event) {
