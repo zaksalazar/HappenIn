@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  renderSavedHistoryBtns
   var url = window.location.href;
   console.log(url);
   var params = getAllUrlParams(url);
@@ -148,6 +149,7 @@ $(document).ready(function () {
             history = JSON.parse(history);
             history.push(bandData._embedded.events);
             localStorage.setItem("history", JSON.stringify(history));
+            console.log("here I am");
           }
         }
       })
@@ -156,21 +158,16 @@ $(document).ready(function () {
       });
   }
 
-  //Daynamically add the past city on the search history
-  function addToHistory(city) {
-    const container = document.getElementById("historyContainer");
-    const historyButton = document.createElement("button");
-    historyButton.classList.add("historyBtn");
-    historyButton.innerHTML = city;
-    container.appendChild(historyButton);
-  }
-
+  //Daynamically add the past city on the search history. THIS IS NOT WORKING 
   function renderSavedHistoryBtns() {
     var savedHistory = localStorage.getItem("history");
-    savedHistory = JSON.parse(savedHistory);
+    var savedHistory = JSON.parse(savedHistory);
+    var historyContainer = document.getElementById("historyContainer");
+    var historyBtn = document.createElement("button");
     if (savedHistory !== null) {
       for (let i = 0; i < savedHistory.length; i++) {
-        addToHistory(savedHistory[i].name);
+        addToHistory(savedHistory);
+        historyContainer.appendChild(historyBtn)    
       }
     }
   }
