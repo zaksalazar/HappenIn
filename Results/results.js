@@ -6,20 +6,10 @@ $(document).ready(function () {
   console.log(params);
 
   var eventCards = document.querySelector("#eventCards");
+  var historyPanel = document.querySelector("#historyContainer")
 
   var numberOfEvents = 5;
 
-  if (!JSON.parse(localStorage.getItem("historyArray"))){
-    historyArray = [];
-    localStorage.setItem("historyArray", JSON.stringify(historyArray))
-  } else {
-    
-    showHistory();
-  }
-
-  function showHistory() {
-    historyArray = JSON.parse(localStorage.getItem("historyArray"));
-  }
 
   // reference: https://www.sitepoint.com/get-url-parameters-with-javascript/
   function getAllUrlParams(url) {
@@ -93,17 +83,20 @@ $(document).ready(function () {
     card.appendChild(eventTitle);
 
     // console.log(data.classifications[0].subGenre.name);
-    var eventSubGenre = document.createElement("p");
-    eventSubGenre.textContent = `Sub-Genre: ${data.classifications[0].subGenre.name}`;
-    card.appendChild(eventSubGenre);
+    if (data.hasOwnProperty('subGenre')){
+      var eventSubGenre = document.createElement("p");
+      eventSubGenre.textContent = `Sub-Genre: ${data.classifications[0].subGenre.name}`;
+      card.appendChild(eventSubGenre);
+
+    }
 
     // console.log(data.priceRanges);
     var eventPrice = document.createElement("p");
     if (data.priceRanges) {
       var price = data.priceRanges[0];
-      eventPrice.textContent = `${price.min}-${price.max} ${price.currency}`;
+      eventPrice.textContent = `Price: ${price.min}-${price.max} ${price.currency}`;
     } else {
-      eventPrice.textContent = "For more info, visit link below";
+      eventPrice.textContent = "Price: For more info, visit link below";
     }
     card.appendChild(eventPrice);
 
@@ -136,7 +129,20 @@ $(document).ready(function () {
     card.appendChild(eventUrl);
   }
 
-  pullBands();
+  function clickHistory(index){
+    console.log("show link to ", historyArray[index]);
+  }
+
+  function showHistory() {
+    for (var i = 0; i < historyArray.length; i++) {
+      var historyBtn = document.createElement('button')
+      historyBtn.textContent = `${historyArray[i].city}-${historyArray[i].date}-${historyArray[i].genre}`
+      // historyBtn.setAttribute("class", "btn btn-secondary w-100 border-bottom mb-1 mt-1")
+      historyPanel.appendChild(historyBtn)
+      historyBtn.addEventListener("click", clickHistory.bind(this, i))
+    }
+  }
+
   //render available options from api, hover over options display detail card
   function pullBands(res) {
     //TODO - findout correct format for genreId param and startDateTime param - can use classificationName parameter
@@ -179,6 +185,7 @@ $(document).ready(function () {
             }
           }
           localStorage.setItem("historyArray", JSON.stringify(historyArray));
+          showHistory();
         }
       })
       .catch((err) => {
@@ -210,6 +217,17 @@ $(document).ready(function () {
       }
     }
   }
+
+  
+
+  if (!JSON.parse(localStorage.getItem("historyArray"))){
+    historyArray = [];
+    localStorage.setItem("historyArray", JSON.stringify(historyArray))
+  } else {
+    historyArray = JSON.parse(localStorage.getItem("historyArray"));
+  }
+
+  pullBands();
 });
 
 // Initialize and add the map
@@ -232,20 +250,20 @@ var latlng = [];
 var latitude = 0;
 var longitude = 0;
 
-let map;
+// let map;
 
-// function to create a google map
-function initMap() {
-  latlng = new google.maps.LatLng(latitude, longitude);
-  infowindow = new google.maps.InfoWindow(location);
-  // The map, centered at latlng
-  map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 5,
-    center: latlng,
-  });
-  // The marker, positioned at latlng
-  marker = new google.maps.Marker({ position: latlng, map: map });
-}
+// // function to create a google map
+// function initMap() {
+//   latlng = new google.maps.LatLng(latitude, longitude);
+//   infowindow = new google.maps.InfoWindow(location);
+//   // The map, centered at latlng
+//   map = new google.maps.Map(document.getElementById("map"), {
+//     zoom: 5,
+//     center: latlng,
+//   });
+//   // The marker, positioned at latlng
+//   marker = new google.maps.Marker({ position: latlng, map: map });
+// }
 
-console.log(location);
-window.initMap = initMap;
+// console.log(location);
+// window.initMap = initMap;
