@@ -9,6 +9,18 @@ $(document).ready(function () {
 
   var numberOfEvents = 5;
 
+  if (!JSON.parse(localStorage.getItem("historyArray"))){
+    historyArray = [];
+    localStorage.setItem("historyArray", JSON.stringify(historyArray))
+  } else {
+    
+    showHistory();
+  }
+
+  function showHistory() {
+    historyArray = JSON.parse(localStorage.getItem("historyArray"));
+  }
+
   // reference: https://www.sitepoint.com/get-url-parameters-with-javascript/
   function getAllUrlParams(url) {
     // get query string from url (optional) or window
@@ -141,15 +153,32 @@ $(document).ready(function () {
           for (var i = 0; i < bandData._embedded.events.length; i++) {
             displayEvents(bandData._embedded.events[i]);
           }
-          var history = localStorage.getItem("history");
-          if (history === null) {
-            history = [bandData._embedded.events];
-            localStorage.setItem("history", JSON.stringify(history));
+          
+          if (historyArray === null) {
+            console.log("null")
+            historyArray = [params];
+            
           } else {
-            history = JSON.parse(history);
-            history.push(bandData._embedded.events);
-            localStorage.setItem("history", JSON.stringify(history));
+            console.log("historyArray present")
+            // historyArray = JSON.parse(historyArray);
+            console.log(historyArray.length)
+            var paramCount = 0;
+            for (var i = 0; i < historyArray.length; i++) {
+              if (JSON.stringify(historyArray[i]) === JSON.stringify(params)){
+                console.log(i, "this one is here!")
+                paramCount++;
+             }
+            }
+            if (paramCount > 0){
+              console.log("already here! not adding!")
+            }
+             else {
+              console.log("not here! adding!")
+              historyArray.push(params);
+              
+            }
           }
+          localStorage.setItem("historyArray", JSON.stringify(historyArray));
         }
       })
       .catch((err) => {
