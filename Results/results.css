@@ -1,87 +1,90 @@
-html{ 
-    background-image: url('https://media.self.com/photos/5e70f72443731c000882cfe7/4:3/w_2560%2Cc_limit/GettyImages-125112134.jpg');
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+html {
+  background-image: url("https://media.self.com/photos/5e70f72443731c000882cfe7/4:3/w_2560%2Cc_limit/GettyImages-125112134.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 nav {
-    display: block;
-    width: 100vh;
-    height: 50vh;
+  display: block;
+  width: 100vh;
+  height: 50vh;
 }
 
 body {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-         background-repeat: no-repeat;
-         background-position: center; 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 #map {
-    height: 100%;
-  }
-
+  height: 100%;
+}
 
 .FlexContainer {
-    display: flex;
-    /* margin-left: 6em; */
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: flex-end;
-    align-content: flex-start;
-    width: 100%;
-    height: 100vh;
-    overflow: auto;
-    flex-direction: row;
+  display: flex;
+  /* margin-left: 6em; */
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  align-content: flex-start;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  flex-direction: row;
 }
 
 .FlexContainer div {
-    background: #484646d0;
-    color: rgb(255, 255, 255);
-    padding: 1em;
-    border-radius: 30px;
-    margin: 0.5em;
-    width: 60%;
-    height: 43%;
-    align-items: center;
-    justify-content: space-between;
-
+  background: #484646d0;
+  color: rgb(255, 255, 255);
+  padding: 1em;
+  border-radius: 30px;
+  margin: 0.5em;
+  width: 60%;
+  height: 43%;
+  align-items: center;
+  justify-content: space-between;
 }
 
 img#logo {
-        height: 200px;
-        FONT-WEIGHT: 200;
-        FONT-WEIGHT: 200;
-        FONT-WEIGHT: 200;
-        FONT-WEIGHT: 200;
-        FONT-WEIGHT: 200;
-        FONT-WEIGHT: 200;
+  height: 200px;
+  font-weight: 200;
+  font-weight: 200;
+  font-weight: 200;
+  font-weight: 200;
+  font-weight: 200;
+  font-weight: 200;
 }
 
 p {
-    font-size: x-large; 
+  font-size: x-large;
 }
 
 h2 {
-    font-size: xx-large
+  font-size: xx-large;
 }
 
 a {
-    font-size: x-large;
-    color: orange
+  font-size: x-large;
+  color: orange;
 }
 
 div#historyContainer {
-    background: #484646d0;
-    color: rgb(255, 255, 255);
-    padding: 1em;
-    border-radius: 30px;
-    margin: 0.5em;
-    width: 60%;
-    height: 43%;
-    align-items: center;
-    justify-content: space-between;
+  background: #484646d0;
+  color: rgb(255, 255, 255);
+  padding: 1em;
+  border-radius: 30px;
+  margin: 0.5em;
+  width: 60%;
+  height: 43%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+button {
+  min-width: 100px;
+  background-color: aqua;
 }
 
 /* .venueResults {
@@ -110,7 +113,6 @@ div#historyContainer {
     color: white;
     background-color: rgb(62, 118, 215);
 } */
-
 
 /* *{
     color:black;

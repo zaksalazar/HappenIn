@@ -1,59 +1,12 @@
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background: #222;
-    font-family: 'Roboto Mono', monospace;
-    background-image: url('https://source.unsplash.com/1600x900/?landscape');
-    font-size: 120%;
-}
+# HappenIn 
+A website to search for live music concerts in a given city.  
 
-.card {
-    background: #000000d0;
-    color: white;
-    padding: 2em;
-    border-radius: 30px;
-    margin: 1em;
-    width: 100%;
-    max-width: 420px;
-}
+## Technology Used 
+HappenIn uses javaScript to create a url for the Ticketmaster API to generate promises based on city, date, and genre parameters.
 
-h1.temp{
-    margin: 0;
-}
 
-.search {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+## Screenshot
+![Portfolio Screenshot](./assets/images/Screen%20Shot%202022-11-13%20at%205.43.49%20PM.png)
 
-button {margin: .5em;
-    border-radius: 30%;
-    border: none;
-    height: 46px;
-    width: 46px;
-    outline: none;
-    background: #7c7c7c2b;
-    color: white;
-    cursor: pointer;
-    transition: .2s ease-in-out;
-}
-
-button:hover {
-    background: #7c7c2b;
-}
-
-input.search-bar {
-    border: none;
-    outline: none;
-    padding: .5em 1em;
-    border-radius: 15px;
-    background: #7c7c7c2b;
-    color: white;
-    font-family: inherit;
-    font-size: 105%;
-    width: calc(100% - 80px);
-}
+## Deployed Website 
+https://zaksalazar.github.io/HappenIn/

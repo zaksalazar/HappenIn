@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  renderSavedHistoryBtns
+
   var url = window.location.href;
   console.log(url);
   var params = getAllUrlParams(url);
@@ -149,7 +149,6 @@ $(document).ready(function () {
             history = JSON.parse(history);
             history.push(bandData._embedded.events);
             localStorage.setItem("history", JSON.stringify(history));
-            console.log("here I am");
           }
         }
       })
