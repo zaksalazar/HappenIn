@@ -48,6 +48,10 @@ body {
   overflow: auto;
 }
 
+div #historyBtns {
+  background-color: transparent;
+}
+
 img#logo {
   height: 200px;
   font-weight: 200;
@@ -85,9 +89,27 @@ div#historyContainer {
 
 button {
   min-width: 100px;
-  background-color: aqua;
+  background-color: transparent;
+  font-family: lato,sans-serif;
+  margin-bottom: 15px;
+  font-weight: bold;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  display: inline-block;
+  padding: 10px 40px 10px 40px;
+  position: relative;
+  border: 3px solid #010101;
+  border-radius: 20px;
 }
 
+button:hover {background-color: orange}
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 /* .venueResults {
     display: flex;
     margin-left: 50px;
